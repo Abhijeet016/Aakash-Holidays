@@ -177,10 +177,40 @@ h2.top-heading{
 
 /*** Hero Header ***/
 .hero-header {
+    position: relative;
+    overflow: hidden;
     background: linear-gradient(rgba(20, 20, 31, .7), rgba(20, 20, 31, .7)), url(../img/bg-hero.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
+}
+
+.hero-bg-video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    pointer-events: none;
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(rgba(20, 20, 31, 0.4), rgba(20, 20, 31, 0.4));
+    z-index: 1;
+}
+
+.hero-header .container,
+.hero-header .container .row,
+.hero-header .container .col-lg-10 {
+    position: relative;
+    z-index: 2;
 }
 
 .breadcrumb-item + .breadcrumb-item::before {
@@ -514,5 +544,136 @@ h2.top-heading{
     
     .whatsapp-float i {
         font-size: 1.6rem !important;
+    }
+}
+
+@media (max-width: 768px) {
+    .hero-header {
+        min-height: 400px;
+        padding-top: 60px !important;
+        padding-bottom: 40px !important;
+        background-position: center top;
+    }
+    .hero-header h1 {
+        font-size: 2.2rem !important;
+        margin-top: 18px;
+        margin-bottom: 10px;
+    }
+    .hero-header p {
+        font-size: 1.2rem !important;
+        margin-bottom: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero-header {
+        min-height: 300px;
+        padding-top: 40px !important;
+        padding-bottom: 20px !important;
+    }
+    .hero-header h1 {
+        font-size: 1.5rem !important;
+        margin-top: 10px;
+        margin-bottom: 6px;
+    }
+    .hero-header p {
+        font-size: 1.05rem !important;
+        margin-bottom: 6px;
+    }
+}
+
+.hero-header h1 {
+    font-size: 3.2rem;
+    font-weight: 800;
+    margin-top: 30px;
+    margin-bottom: 18px;
+    background: linear-gradient(90deg, #ffb347 0%, #00bfff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.hero-header p {
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-bottom: 18px;
+    background: linear-gradient(90deg, #ff6a00 0%, #ffd700 50%, #00bfff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+
+body {
+    background: #fff;
+    color: #212529;
+    font-family: 'Nunito', 'Heebo', Arial, sans-serif;
+    line-height: 1.5;
+}
+
+.container, .container-xxl, .container-fluid {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+.section-title {
+    color: inherit;
+    letter-spacing: normal;
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    color: inherit;
+    font-family: inherit;
+    font-weight: 600;
+    letter-spacing: normal;
+}
+
+hr.section-divider {
+    border: none;
+    border-top: 1px solid #eee;
+    width: 100%;
+    margin: 1.5rem 0;
+    opacity: 1;
+}
+
+.card, .service-item, .package-item, .testimonial-item, .team-item, .offer-card {
+    background: none;
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid #eee;
+}
+
+.card img, .service-item img, .package-item img, .testimonial-item img, .team-item img, .offer-card img {
+    border-radius: 0;
+}
+
+.btn-primary, .btn-success, .btn-outline-primary {
+    border-radius: 0.25rem;
+    font-weight: 600;
+    letter-spacing: normal;
+}
+
+p, li {
+    color: inherit;
+    font-size: 1rem;
+}
+
+@media (max-width: 768px) {
+    .container, .container-xxl, .container-fluid {
+        border-radius: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+        margin-bottom: 0;
+    }
+    .card, .service-item, .package-item, .testimonial-item, .team-item, .offer-card {
+        border-radius: 0;
     }
 }
