@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Allow all search engines to crawl the site
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Slurp
+Allow: /
+
+# Disallow crawling of admin or private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+Disallow: /temp/
+
+# Allow crawling of important files
+Allow: /sitemap.xml
+Allow: /css/
+Allow: /js/
+Allow: /img/
+
+# Sitemap location
+Sitemap: https://akashholidays.com/sitemap.xml
+
+# Crawl delay (optional - be respectful to server resources)
+Crawl-delay: 1 
