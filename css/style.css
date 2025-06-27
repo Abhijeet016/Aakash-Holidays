@@ -83,57 +83,89 @@ h2.top-heading{
 
 
 /*** Navbar ***/
-.navbar-light .navbar-nav .nav-link {
-    font-family: 'Nunito', sans-serif;
+.navbar {
+    background: rgba(255,255,255,0.85) !important;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.08);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    transition: background 0.3s, box-shadow 0.3s;
+}
+
+.navbar .navbar-brand img {
+    max-height: 70px;
+    transition: max-height 0.3s;
+}
+
+.navbar .navbar-nav .nav-link {
     position: relative;
-    margin-right: 25px;
-    padding: 35px 0;
-    color: #FFFFFF !important;
-    font-size: 18px;
+    font-size: 1.1rem;
     font-weight: 600;
-    outline: none;
-    transition: .5s;
+    color: #222 !important;
+    margin: 0 10px;
+    transition: color 0.2s;
 }
 
-.sticky-top.navbar-light .navbar-nav .nav-link {
-    padding: 20px 0;
-    color: var(--dark) !important;
+.navbar .navbar-nav .nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, #ffb347 0%, #00bfff 100%);
+    transition: width 0.3s;
+    position: absolute;
+    left: 0;
+    bottom: -4px;
 }
 
-.navbar-light .navbar-nav .nav-link:hover,
-.navbar-light .navbar-nav .nav-link.active {
-    color: var(--primary) !important;
+.navbar .navbar-nav .nav-link:hover,
+.navbar .navbar-nav .nav-link.active {
+    color: #00bfff !important;
 }
 
-.navbar-light .navbar-brand img {
-    max-height: 60px;
-    transition: .5s;
+.navbar .navbar-nav .nav-link:hover::after,
+.navbar .navbar-nav .nav-link.active::after {
+    width: 100%;
 }
 
-.sticky-top.navbar-light .navbar-brand img {
-    max-height: 60px;
+.sticky-top.navbar {
+    background: rgba(255,255,255,0.97) !important;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
 }
 
-@media (max-width: 991.98px) {
-    .sticky-top.navbar-light {
-        position: relative;
-        background: #FFFFFF;
+.hero-header h1, .hero-header p {
+    text-shadow: 0 4px 24px rgba(0,0,0,0.18), 0 1.5px 4px rgba(0,0,0,0.12);
+}
+
+/* Scroll-down indicator */
+.hero-scroll-indicator {
+    position: absolute;
+    left: 50%;
+    bottom: 24px;
+    transform: translateX(-50%);
+    z-index: 10;
+    width: 32px;
+    height: 32px;
+    animation: bounceDown 1.6s infinite;
+    opacity: 0.7;
+}
+@keyframes bounceDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); }
+    50% { transform: translateX(-50%) translateY(12px); }
+}
+
+@media (max-width: 768px) {
+    .navbar .navbar-brand img {
+        max-height: 48px;
     }
-
-    .navbar-light .navbar-collapse {
-        margin-top: 15px;
-        border-top: 1px solid #DDDDDD;
+    .navbar .navbar-nav .nav-link {
+        font-size: 1rem;
+        margin: 0 4px;
     }
-
-    .navbar-light .navbar-nav .nav-link,
-    .sticky-top.navbar-light .navbar-nav .nav-link {
-        padding: 10px 0;
-        margin-left: 0;
-        color: var(--dark) !important;
-    }
-
-    .navbar-light .navbar-brand img {
-        max-height: 45px;
+    .hero-scroll-indicator {
+        width: 24px;
+        height: 24px;
+        bottom: 12px;
     }
 }
 
@@ -676,4 +708,14 @@ p, li {
     .card, .service-item, .package-item, .testimonial-item, .team-item, .offer-card {
         border-radius: 0;
     }
+}
+
+.navbar-brand .brand-gradient {
+    background: linear-gradient(90deg, #a259c6 0%, #ff4d4d 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-fill-color: transparent;
+    font-weight: 800;
+    letter-spacing: 1px;
 }
