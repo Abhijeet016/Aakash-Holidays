@@ -195,5 +195,29 @@
         }
     });
     
+
+    // Fade in videos when ready
+    $(document).ready(function() {
+        $('video').each(function() {
+            var video = this;
+            video.addEventListener('canplay', function() {
+                $(video).addClass('loaded');
+                // Hide poster image if present
+                var $poster = $(video).siblings('.about-poster-img, .hero-poster-img');
+                if ($poster.length) {
+                    $poster.addClass('hide');
+                }
+            });
+            // For browsers that fire 'playing' instead
+            video.addEventListener('playing', function() {
+                $(video).addClass('loaded');
+                var $poster = $(video).siblings('.about-poster-img, .hero-poster-img');
+                if ($poster.length) {
+                    $poster.addClass('hide');
+                }
+            });
+        });
+    });
+
 })(jQuery);
 
