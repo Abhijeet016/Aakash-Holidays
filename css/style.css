@@ -233,7 +233,7 @@ h2.top-heading{
     left: 0;
     width: 100%;
     height: 100%;
-    background: linear-gradient(rgba(20, 20, 31, 0.4), rgba(20, 20, 31, 0.4));
+    background: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6));
     z-index: 1;
 }
 
@@ -613,28 +613,26 @@ h2.top-heading{
     }
 }
 
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    100% { background-position: 100% 50%; }
+}
+
 .hero-header h1 {
     font-size: 3.2rem;
     font-weight: 800;
     margin-top: 30px;
     margin-bottom: 18px;
-    background: linear-gradient(90deg, #ffb347 0%, #00bfff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    color: #33fff0 !important;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.9);
 }
+
 .hero-header p {
     font-size: 1.6rem;
-    font-weight: 500;
+    font-weight: 600;
     margin-bottom: 18px;
-    background: linear-gradient(90deg, #ff6a00 0%, #ffd700 50%, #00bfff 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-    text-fill-color: transparent;
-    text-shadow: 0 2px 8px rgba(0,0,0,0.25);
+    color: #33fff0 !important;
+    text-shadow: 0 4px 14px rgba(0, 0, 0, 0.9);
 }
 
 body {

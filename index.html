@@ -174,6 +174,7 @@
                         </div>
                     </div>
                     <a href="#contact" class="nav-item nav-link">Contact</a>
+                    <a href="manage-packages.html" class="nav-item nav-link">Add/Explore Packages</a>
                 </div>
                 <!-- <a href="" class="btn btn-primary rounded-pill py-2 px-4">Register</a> -->
             </div>
@@ -1073,6 +1074,60 @@
 
     <!-- Template Javascript -->
     <script src="js/main.js"></script>
+
+    <!-- Additional Structured Data for Local SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "name": "Akash Holidays",
+      "image": "https://akashholidays.com/img/Logos.png",
+      "@id": "https://akashholidays.com/",
+      "url": "https://akashholidays.com/",
+      "telephone": "+91-9839685724",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Plot No 62, Shukla Vihar Para",
+        "addressLocality": "Lucknow",
+        "addressRegion": "Uttar Pradesh",
+        "postalCode": "226001",
+        "addressCountry": "IN"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "26.826596",
+        "longitude": "80.872126"
+      },
+      "openingHoursSpecification": [{
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"
+        ],
+        "opens": "09:00",
+        "closes": "18:00"
+      }],
+      "sameAs": [
+        "https://www.facebook.com/akashholidays",
+        "https://www.instagram.com/akashholidays",
+        "https://www.linkedin.com/company/akashholidays"
+      ]
+    }
+    </script>
+
+    <!-- Website Schema including search action -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "Akash Holidays",
+      "url": "https://akashholidays.com/",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://akashholidays.com/index.html#pack?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
 </body>
 
 </html>

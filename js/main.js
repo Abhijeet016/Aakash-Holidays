@@ -202,21 +202,97 @@
             var video = this;
             video.addEventListener('canplay', function() {
                 $(video).addClass('loaded');
-                // Hide poster image if present
                 var $poster = $(video).siblings('.about-poster-img, .hero-poster-img');
-                if ($poster.length) {
-                    $poster.addClass('hide');
-                }
+                if ($poster.length) { $poster.addClass('hide'); }
             });
-            // For browsers that fire 'playing' instead
             video.addEventListener('playing', function() {
                 $(video).addClass('loaded');
                 var $poster = $(video).siblings('.about-poster-img, .hero-poster-img');
-                if ($poster.length) {
-                    $poster.addClass('hide');
-                }
+                if ($poster.length) { $poster.addClass('hide'); }
             });
         });
+    });
+
+    // --------- Inject custom packages on Home page ---------
+    $(document).ready(function() {
+        const STORAGE_KEY = 'customPackages';
+        const packages = (() => {
+            try { return JSON.parse(localStorage.getItem(STORAGE_KEY)) || []; } catch(e){ return []; }
+        })();
+
+        if (packages.length === 0) return; // nothing to add
+
+        const $row = $('#pack .row.g-4.justify-content-center');
+        if (!$row.length) return;
+
+        const template = (pkg) => `
+            <article class="col-lg-4 col-md-6">
+                <div class="package-item">
+                    <div class="overflow-hidden" style="height: 200px;">
+                        <a href="package-detail.html?id=${pkg.id || ''}"><img class="img-fluid" src="${pkg.image}" alt="${pkg.destination}"></a>
+                    </div>
+                    <div class="d-flex border-bottom">
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-map-marker-alt text-primary me-2"></i>${pkg.destination}</small>
+                        <small class="flex-fill text-center border-end py-2"><i class="fa fa-calendar-alt text-primary me-2"></i>${pkg.nights}</small>
+                        <small class="flex-fill text-center py-2"><i class="fa fa-user text-primary me-2"></i>${pkg.persons}</small>
+                    </div>
+                    <div class="text-center p-4">
+                        <h3 class="mb-0">INR ${pkg.price}</h3>
+                        <div class="mb-3">
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                            <small class="fa fa-star text-primary"></small>
+                        </div>
+                        <p>${pkg.description}</p>
+                        <div class="d-flex justify-content-center mb-2">
+                            <a href="https://wa.me/919839685724" target="_blank" class="btn btn-sm btn-primary px-3" style="border-radius: 30px;">Book Now</a>
+                            <a href="package-detail.html?id=${pkg.id || ''}" class="btn btn-sm btn-outline-primary px-3 ms-2" style="border-radius: 30px;">Details</a>
+                        </div>
+                    </div>
+                </div>
+            </article>`;
+
+        packages.forEach(pkg => {
+            $row.append(template(pkg));
+
+            // Try to derive duration in ISO 8601 format (e.g. P3D for 3 days/nights)
+            let durationIso = undefined;
+            const nightMatch = /([0-9]+)\s*(Night|Day|Days|Nights)/i.exec(pkg.nights);
+            if (nightMatch) {
+                const num = parseInt(nightMatch[1], 10);
+                if (!isNaN(num) && num > 0) {
+                    durationIso = `P${num}D`;
+                }
+            }
+
+            const ld = {
+                "@context": "https://schema.org",
+                "@type": "Product",
+                "name": `${pkg.destination} ${pkg.nights} Package`,
+                "description": `${pkg.nights} | ${pkg.persons} | ${pkg.description}`,
+                "image": pkg.image,
+                "sku": `${pkg.destination.replace(/\s+/g,'_').toUpperCase()}_${pkg.nights.replace(/\s+/g,'')}_${pkg.price}`,
+                "offers": {
+                    "@type": "Offer",
+                    "priceCurrency": "INR",
+                    "price": pkg.price,
+                    "availability": "https://schema.org/InStock",
+                    "url": window.location.href + "#pack"
+                }
+            };
+            if (durationIso) ld["duration"] = durationIso;
+            const script = document.createElement('script');
+            script.type = 'application/ld+json';
+            script.textContent = JSON.stringify(ld);
+            document.head.appendChild(script);
+        });
+
+        // Ensure each package has an id (for older saved packages)
+        let packagesChanged = false;
+        packages.forEach(pkg => { if(!pkg.id){ pkg.id = Date.now().toString() + Math.random().toString(16).slice(2); packagesChanged = true; } });
+        if(packagesChanged){ localStorage.setItem('customPackages', JSON.stringify(packages)); }
     });
 
 })(jQuery);
