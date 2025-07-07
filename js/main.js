@@ -295,5 +295,28 @@
         if(packagesChanged){ localStorage.setItem('customPackages', JSON.stringify(packages)); }
     });
 
+    // ------- Fix microdata price format & availability for static packages -------
+    $(document).ready(function(){
+        $('article [itemscope][itemtype="https://schema.org/Product"]').each(function(){
+            const $offer = $(this).find('[itemprop="offers"][itemscope]');
+            if($offer.length){
+                // ensure availability link exists
+                if($offer.find('[itemprop="availability"]').length===0){
+                    $('<link itemprop="availability" href="https://schema.org/InStock">').appendTo($offer);
+                }
+
+                const $priceSpan = $offer.find('[itemprop="price"]');
+                if($priceSpan.length){
+                    let priceText = $priceSpan.text().trim();
+                    // remove commas
+                    const numeric = priceText.replace(/,/g,'');
+                    if(numeric !== priceText){
+                        $priceSpan.text(numeric);
+                    }
+                }
+            }
+        });
+    });
+
 })(jQuery);
 
